@@ -1,5 +1,4 @@
 import {Client, ColorResolvable, Message, MessageEmbed} from 'discord.js';
-import mongoose from 'mongoose';
 import * as cmds from '../commands';
 import * as slashcmds from '../slashCommands';
 import {Command, SlashCommand, Data} from '../types';
@@ -131,10 +130,4 @@ export default async (client: Client, data: Data) => {
     // Register for all the guilds the bot is in
     await client.application!.commands.set(arrayOfSlashCommands);
   });
-
-  // mongoose
-  const {mongooseURI} = data.config;
-  if (!mongooseURI) return;
-
-  mongoose.connect(mongooseURI).then(() => console.log('Connected to mongodb'));
 };
