@@ -4,7 +4,7 @@ import * as youtubedl from 'yt-dlp-exec';
 export const determineUrl = (url: string): 'youtubeShorts' | 'unknown' => {
   const youtubeShortRegex =
     // eslint-disable-next-line no-irregular-whitespace
-    /http(?:s?):\/\/(?:www\.)?youtube\.com\/shorts\/([\w\-_]*)(\?feature=share)/g;
+    /http(?:s?):\/\/(?:www\.)?youtube\.com\/shorts\/([\w\-_]*)|(\?feature=share)/gm
 
   if (youtubeShortRegex.test(url)) {
     return 'youtubeShorts';

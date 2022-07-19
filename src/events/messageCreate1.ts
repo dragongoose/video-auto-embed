@@ -22,7 +22,7 @@ client.on('messageCreate', async (message: Message) => {
   if (urlType === 'unknown') return logger.debug('ignoring, unknown url');
 
   if (urlType === 'youtubeShorts' || urlType === 'tiktok') {
-    const msg = await message.reply('Working...');
+    const msg = await message.reply('i recvie the vido');
     logger.debug('getting video');
 
     // Convert YT short url to long url
@@ -54,7 +54,7 @@ client.on('messageCreate', async (message: Message) => {
       );
 
     const file = new MessageAttachment(video + '/');
-    msg.edit({embeds: [embed], files: [file]});
+    msg.edit({ content: 'done!', embeds: [embed], files: [file]});
 
     //TODO Delete video after it's been sent
   }
