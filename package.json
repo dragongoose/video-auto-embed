@@ -4,27 +4,16 @@
   "description": "",
   "main": "./build/index.js",
   "typings": "./build/index.d.ts",
-  "scripts": {
-    "start": "node index.js",
-    "test": "nodemon index.js",
-    "lint": "gts lint",
-    "clean": "gts clean",
-    "compile": "tsc",
-    "fix": "gts fix",
-    "prepare": "npm run compile",
-    "pretest": "npm run compile",
-    "posttest": "npm run lint"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "chalk": "^4.0.1",
-    "discord.js": "^14.3.0",
+    "discord.js": "^13.6.0",
     "gts": "^3.1.0",
     "log4js": "^6.5.2",
     "node-fetch": "^3.2.6",
-    "yt-dlp-exec": "^1.0.2",
+    "youtube-dl-exec": "^2.1.5",
     "ytdl-core": "^4.11.0"
   },
   "devDependencies": {

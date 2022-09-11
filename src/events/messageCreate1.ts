@@ -21,17 +21,12 @@ client.on('messageCreate', async (message: Message) => {
 
   if (urlType === 'unknown') return logger.debug('ignoring, unknown url');
 
-  if (urlType === 'youtubeShorts' || urlType === 'tiktok') {
+  if (urlType === 'youtubeShorts') {
     const msg = await message.reply('i recvie the vido');
     logger.debug('getting video');
 
     // Convert YT short url to long url
     const newUrl = message.content.replace('shorts/', 'watch?v=');
-
-    const video = await downloadVideo(newUrl).catch(err => {
-      logger.error(err);
-      msg.edit('Whoops.. something went wrong');
-    });
 
     // use ytdl-core to get the info about the video
     const info = await ytdl.getInfo(newUrl);
@@ -52,10 +47,34 @@ client.on('messageCreate', async (message: Message) => {
       .setDescription(
         `${info.videoDetails.likes} likes \n ${info.videoDetails.viewCount} views`
       );
-
-    const file = new MessageAttachment(video + '/');
-    msg.edit({ content: 'done!', embeds: [embed], files: [file]});
-
+    
+    const video = await downloadVideo(newUrl)
+    .then((video) => {
+      const file = new MessageAttachment(video + '/');
+      msg.edit({ content: 'done!', embeds: [embed], files: [file]});
+    })
+    .catch(err => {
+        logger.error(err);
+        msg.edit('Whoops.. something went wrong');
+        return;
+    });
     //TODO Delete video after it's been sent
+  }
+
+  if (urlType === 'twitter') {
+    const msg = await message.reply('i recvie the vido');
+    logger.debug('getting video');
+    logger.debug('url: ' + message.content);
+
+    const video = await downloadVideo(message.content)
+    .then((video) => {
+      const file = new MessageAttachment(video + '/');
+      msg.edit({ content: 'done!', files: [file]});
+    })
+    .catch(err => {
+      logger.error(err);
+      msg.edit('Whoops.. something went wrong (Are you sure the tweet has a video?)');
+      return;
+    });
   }
 });

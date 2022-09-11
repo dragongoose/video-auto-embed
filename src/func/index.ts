@@ -1,13 +1,19 @@
-import * as youtubedl from 'yt-dlp-exec';
+import * as youtubedl from 'youtube-dl-exec';
 
 // eslint-disable-next-line prettier/prettier
-export const determineUrl = (url: string): 'youtubeShorts' | 'unknown' => {
+export const determineUrl = (url: string): 'youtubeShorts' | 'twitter' | 'unknown' => {
   const youtubeShortRegex =
     // eslint-disable-next-line no-irregular-whitespace
     /http(?:s?):\/\/(?:www\.)?youtube\.com\/shorts\/([\w\-_]*)|(\?feature=share)/gm
 
+  const twitterRegex = /^https?:\/\/twitter\.com\/(?:#!\/)?(\w+)\/status(?:es)?\/(\d+)(?:\/.*)?$/g
+
   if (youtubeShortRegex.test(url)) {
     return 'youtubeShorts';
+  }
+
+  if (twitterRegex.test(url)) {
+    return 'twitter';
   }
 
   return 'unknown';
