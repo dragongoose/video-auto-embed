@@ -28,6 +28,13 @@ Converts youtube short links to a discord attatchment
 
 ## Getting Started
 
+### Supported sites
+Here is a list of the current sites supported and planned sites
+- [x] Youtube Shorts
+- [x] Twitter
+- [ ] Reddit
+- [ ] Tiktok
+If you would like to submit any sites to be added, create an issue.
 
 ### Prerequisites
 
